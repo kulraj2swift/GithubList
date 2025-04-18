@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B0354FB2DB3075C005E291E /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0354FA2DB3075C005E291E /* ApiKeys.swift */; };
 		80C2E37602156354BE832D16 /* Pods_GithubList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70121EE85003CC940154695F /* Pods_GithubList.framework */; };
 		9F1B6D26CE350DF1FE2C05D8 /* Pods_GithubListTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49E940C6A5EB8CE7E6EA7C7 /* Pods_GithubListTests.framework */; };
 		D8C7BBE2E9F9C6D995BC89C8 /* Pods_GithubList_GithubListUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6817312B520C3BD7E15BFC56 /* Pods_GithubList_GithubListUITests.framework */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B0354FA2DB3075C005E291E /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		2B72F7092DB279FB005CC491 /* GithubList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B72F71F2DB279FD005CC491 /* GithubListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B72F7292DB279FD005CC491 /* GithubListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,15 +67,11 @@
 		};
 		2B72F7222DB279FD005CC491 /* GithubListTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = GithubListTests;
 			sourceTree = "<group>";
 		};
 		2B72F72C2DB279FD005CC491 /* GithubListUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = GithubListUITests;
 			sourceTree = "<group>";
 		};
@@ -110,6 +108,7 @@
 		2B72F7002DB279FB005CC491 = {
 			isa = PBXGroup;
 			children = (
+				2B0354FA2DB3075C005E291E /* ApiKeys.swift */,
 				2B72F70B2DB279FB005CC491 /* GithubList */,
 				2B72F7222DB279FD005CC491 /* GithubListTests */,
 				2B72F72C2DB279FD005CC491 /* GithubListUITests */,
@@ -398,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B0354FB2DB3075C005E291E /* ApiKeys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

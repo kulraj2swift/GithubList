@@ -6,6 +6,8 @@ target 'GithubList' do
   use_frameworks!
 
   # Pods for GithubList
+  pod 'Alamofire'
+  pod 'AlamofireImage'
 
   target 'GithubListTests' do
     inherit! :search_paths

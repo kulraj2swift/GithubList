@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SortOptionView" customModule="GithubList" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="73"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Option" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIS-rr-bLq">
+                    <rect key="frame" x="16" y="8" width="253" height="57"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8r-8o-8bo">
+                    <rect key="frame" x="289" y="16.666666666666671" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="gFB-Ra-V8S"/>
+                        <constraint firstAttribute="height" constant="40" id="gd9-nr-ufV"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="arrowshape.up.fill" catalog="system"/>
+                    <connections>
+                        <action selector="ascendinTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="3Yt-WB-WPp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUR-Aa-SZU">
+                    <rect key="frame" x="337" y="16.666666666666671" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="PH6-z1-m3X"/>
+                        <constraint firstAttribute="height" constant="40" id="m1O-Z8-wMA"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="arrowshape.down.fill" catalog="system"/>
+                    <connections>
+                        <action selector="descendingTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="mdQ-W0-Am0"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="RUR-Aa-SZU" secondAttribute="trailing" constant="16" id="9eU-0h-SFa"/>
+                <constraint firstItem="tIS-rr-bLq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Pjz-RV-VMC"/>
+                <constraint firstItem="RUR-Aa-SZU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="X6Y-p5-kA8"/>
+                <constraint firstItem="tIS-rr-bLq" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" constant="-8" id="bcZ-8D-DlZ"/>
+                <constraint firstItem="W8r-8o-8bo" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fgU-iT-pBF"/>
+                <constraint firstItem="tIS-rr-bLq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gYm-yr-Wad"/>
+                <constraint firstItem="W8r-8o-8bo" firstAttribute="leading" secondItem="tIS-rr-bLq" secondAttribute="trailing" constant="20" id="kY6-i9-wwU"/>
+                <constraint firstItem="RUR-Aa-SZU" firstAttribute="leading" secondItem="W8r-8o-8bo" secondAttribute="trailing" constant="8" id="zXy-eu-fzS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="ascendingButton" destination="W8r-8o-8bo" id="QO8-NU-0Un"/>
+                <outlet property="descendingButton" destination="RUR-Aa-SZU" id="BPX-Ch-03z"/>
+                <outlet property="optionLabel" destination="tIS-rr-bLq" id="Z4Q-tf-2LA"/>
+            </connections>
+            <point key="canvasLocation" x="113.74045801526717" y="-285.56338028169017"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrowshape.down.fill" catalog="system" width="123" height="128"/>
+        <image name="arrowshape.up.fill" catalog="system" width="123" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

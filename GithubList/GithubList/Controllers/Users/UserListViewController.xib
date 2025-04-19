@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,6 +13,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="eBD-ot-xA3" id="zBL-R6-TRe"/>
                 <outlet property="searchTextField" destination="gnr-Tn-tfz" id="XvK-0D-6cG"/>
+                <outlet property="sortButton" destination="w6u-vu-f4a" id="J59-Ce-Imv"/>
                 <outlet property="usersTableView" destination="m1n-tL-ITC" id="m0j-72-Ez8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,8 +26,24 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2B-fu-JSc">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="130"/>
                     <subviews>
+                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6u-vu-f4a">
+                            <rect key="frame" x="345" y="82" width="40" height="40"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="ELI-DS-kOr"/>
+                                <constraint firstAttribute="height" constant="40" id="zDU-gt-kdQ"/>
+                            </constraints>
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <buttonConfiguration key="configuration" style="plain">
+                                <backgroundConfiguration key="background" image="sort"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="searchTapped:" destination="-1" eventType="touchUpInside" id="6hc-2g-Sy9"/>
+                                <action selector="sortTapped:" destination="-1" eventType="touchUpInside" id="HHq-XG-rUy"/>
+                            </connections>
+                        </button>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gnr-Tn-tfz">
-                            <rect key="frame" x="8" y="82" width="309" height="40"/>
+                            <rect key="frame" x="8" y="82" width="273" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="6vN-ie-Uii"/>
                             </constraints>
@@ -36,7 +54,7 @@
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPw-rL-fTp">
-                            <rect key="frame" x="333" y="82" width="40" height="40"/>
+                            <rect key="frame" x="297" y="82" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="emN-B7-Og9"/>
                                 <constraint firstAttribute="height" constant="40" id="oVa-GA-4qN"/>
@@ -52,11 +70,13 @@
                     <color key="backgroundColor" systemColor="systemGray4Color"/>
                     <constraints>
                         <constraint firstItem="aPw-rL-fTp" firstAttribute="leading" secondItem="gnr-Tn-tfz" secondAttribute="trailing" constant="16" id="0gG-ug-Ntg"/>
+                        <constraint firstItem="w6u-vu-f4a" firstAttribute="leading" secondItem="aPw-rL-fTp" secondAttribute="trailing" constant="8" id="Ebp-Rx-QMA"/>
                         <constraint firstAttribute="bottom" secondItem="aPw-rL-fTp" secondAttribute="bottom" constant="8" id="K7P-Et-7IQ"/>
                         <constraint firstAttribute="height" constant="130" id="R0Q-hj-hOf"/>
                         <constraint firstItem="gnr-Tn-tfz" firstAttribute="leading" secondItem="t2B-fu-JSc" secondAttribute="leading" constant="8" id="Wmv-iK-vLG"/>
                         <constraint firstItem="gnr-Tn-tfz" firstAttribute="centerY" secondItem="aPw-rL-fTp" secondAttribute="centerY" id="bKi-5u-fgg"/>
-                        <constraint firstAttribute="trailing" secondItem="aPw-rL-fTp" secondAttribute="trailing" constant="20" symbolic="YES" id="dCP-ID-cFG"/>
+                        <constraint firstAttribute="trailing" secondItem="w6u-vu-f4a" secondAttribute="trailing" constant="8" id="nID-2k-a8h"/>
+                        <constraint firstAttribute="bottom" secondItem="w6u-vu-f4a" secondAttribute="bottom" constant="8" id="zF1-ED-zG4"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="m1n-tL-ITC">
@@ -90,6 +110,7 @@
     </objects>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="sort" width="320" height="320"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

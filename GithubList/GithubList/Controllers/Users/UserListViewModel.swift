@@ -16,9 +16,12 @@ protocol UserListViewModelDelegate: AnyObject {
 class UserListViewModel {
     
     var users: [User] = []
+    var sortedUsers: [User] = []
     var apiManager = ApiManager.shared
     weak var delegate: UserListViewModelDelegate?
     private var previousSearchText: String?
+    var selectedSortOption: SortOption = .none
+    var selectedSortOrder: UserSortOrder = .ascending
     
     func searchForUsers(text: String?) {
         var shouldClearPreviousResults = false
@@ -50,11 +53,61 @@ class UserListViewModel {
                 }
                 let nextUserBatch = searchResult.items ?? []
                 users.append(contentsOf: nextUserBatch)
+                applySorting()
                 delegate?.usersFetched()
             case .failure(let error):
                 print(error.localizedDescription)
                 delegate?.failedtoFetchUsers()
             }
+        }
+    }
+    
+    func applySorting() {
+        sortedUsers = getSortedUsers()
+    }
+    
+    private func getSortedUsers() -> [User] {
+        switch selectedSortOption {
+        case .login:
+            switch selectedSortOrder {
+            case .ascending:
+                return users.sorted(by: {
+                    if let login = $0.login,
+                       let login1 = $1.login {
+                        return login < login1
+                    }
+                    return false
+                })
+            case .descending:
+                return users.sorted(by: {
+                    if let login = $0.login,
+                       let login1 = $1.login {
+                        return login > login1
+                    }
+                    return false
+                })
+            }
+        case .id:
+            switch selectedSortOrder {
+            case .ascending:
+                return users.sorted(by: {
+                    if let id = $0.id,
+                       let id1 = $1.id {
+                        return id < id1
+                    }
+                    return false
+                })
+            case .descending:
+                return users.sorted(by: {
+                    if let id = $0.id,
+                       let id1 = $1.id {
+                        return id > id1
+                    }
+                    return false
+                })
+            }
+        case .none:
+            return users
         }
     }
 }

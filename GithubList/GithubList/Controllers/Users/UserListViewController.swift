@@ -12,6 +12,7 @@ class UserListViewController: UIViewController {
     @IBOutlet weak var usersTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var sortButton: UIButton!
     
     var viewModel: UserListViewModel!
 
@@ -31,16 +32,30 @@ class UserListViewController: UIViewController {
         viewModel.searchForUsers(text: searchTextField.text)
     }
 
+    @IBAction func sortTapped(_ sender: Any) {
+        let sortViewController = SortOptionsViewController(nibName: "SortOptionsViewController", bundle: nil)
+        sortViewController.onClose = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        sortViewController.onApply = { [weak self] sortOption, sortOrder in
+            self?.viewModel.selectedSortOrder = sortOrder
+            self?.viewModel.selectedSortOption = sortOption
+            self?.viewModel.applySorting()
+            self?.usersTableView.reloadData()
+            self?.dismiss(animated: true)
+        }
+        present(sortViewController, animated: true)
+    }
 }
 
 extension UserListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.users.count
+        return viewModel.sortedUsers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let userCell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.reuseIdentifier) as! UserTableViewCell
-        userCell.user = viewModel.users[indexPath.row]
+        userCell.user = viewModel.sortedUsers[indexPath.row]
         return userCell
     }
 }

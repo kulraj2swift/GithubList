@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 protocol UserListViewModelDelegate: AnyObject {
-    func usersFetched()
+    func usersFetched(isSearchTextChanged: Bool)
     func failedtoFetchUsers()
 }
 
@@ -22,6 +22,9 @@ class UserListViewModel {
     private var previousSearchText: String?
     var selectedSortOption: SortOption = .none
     var selectedSortOrder: UserSortOrder = .ascending
+    private let pageLimit = 40
+    private var pageNumber = 1
+    var incompleteResults = false
     
     func searchForUsers(text: String?) {
         var shouldClearPreviousResults = false
@@ -36,26 +39,43 @@ class UserListViewModel {
             query.append("&")
         }
         query.append("type:user")
+        query.append("&")
+        query.append("\(ApiKeys.resultsPerPage):\(pageLimit)")
+        query.append("&")
+        query.append("\(ApiKeys.pageNumber):\(pageNumber)")
+        print("query: \(query)")
         var characterSet = CharacterSet.urlQueryAllowed
         characterSet.remove(charactersIn: ":")
         characterSet.insert(charactersIn: "?+=")
         query = query.addingPercentEncoding(withAllowedCharacters: characterSet) ?? ""
         let url = Urls.baseUrl + Urls.searchEndpoint + query
+        
         Task {
-            let searchResult = await AF.request(url, method: .get, headers: apiManager.getHttpHeaders())
+            let response = await AF.request(url, method: .get, headers: apiManager.getHttpHeaders())
                 .validate()
                 .serializingDecodable(SearchResult.self)
                 .response
-            switch searchResult.result {
+            if let data = response.data,
+               let json = try? JSONSerialization.jsonObject(with: data) {
+                print(json)
+            }
+            switch response.result {
             case .success(let searchResult):
                 if shouldClearPreviousResults {
                     users.removeAll()
+                    pageNumber = 1
                 }
                 let nextUserBatch = searchResult.items ?? []
                 users.append(contentsOf: nextUserBatch)
+                incompleteResults = searchResult.incompleteResults ?? false
                 applySorting()
-                delegate?.usersFetched()
+                delegate?.usersFetched(isSearchTextChanged: shouldClearPreviousResults)
             case .failure(let error):
+                if let data = response.data,
+                   let json = try? JSONSerialization.jsonObject(with: data) {
+                    print(json)
+                }
+                incompleteResults = false //since we wont be able to fetch more
                 print(error.localizedDescription)
                 delegate?.failedtoFetchUsers()
             }
@@ -109,5 +129,10 @@ class UserListViewModel {
         case .none:
             return users
         }
+    }
+    
+    func fetchNextBatch() {
+        pageNumber += 1
+        searchForUsers(text: previousSearchText)
     }
 }

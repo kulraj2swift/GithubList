@@ -15,12 +15,15 @@ class UserListViewController: UIViewController {
     @IBOutlet weak var sortButton: UIButton!
     
     var viewModel: UserListViewModel!
+    
+    let footerHeight: CGFloat = 44
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         callApi()
         usersTableView.register(UINib(nibName: UserTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: UserTableViewCell.reuseIdentifier)
+        //usersTableView.register(UIView.self, forHeaderFooterViewReuseIdentifier: "FooterReuse")
     }
     
     @IBAction func searchTapped(_ sender: Any) {
@@ -34,6 +37,8 @@ class UserListViewController: UIViewController {
 
     @IBAction func sortTapped(_ sender: Any) {
         let sortViewController = SortOptionsViewController(nibName: "SortOptionsViewController", bundle: nil)
+        sortViewController.selectedSortOrder = viewModel.selectedSortOrder
+        sortViewController.selectedSortOption = viewModel.selectedSortOption
         sortViewController.onClose = { [weak self] in
             self?.dismiss(animated: true)
         }
@@ -56,7 +61,26 @@ extension UserListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let userCell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.reuseIdentifier) as! UserTableViewCell
         userCell.user = viewModel.sortedUsers[indexPath.row]
+        if indexPath.row == viewModel.sortedUsers.count - 1,
+           viewModel.incompleteResults {
+            viewModel.fetchNextBatch()
+        }
         return userCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return footerHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if viewModel.incompleteResults {
+            let loader = UIActivityIndicatorView(style: .medium)
+            loader.color = .black
+            loader.startAnimating()
+            view.addSubview(loader)
+            return loader
+        }
+        return nil
     }
 }
 
@@ -75,22 +99,29 @@ extension UserListViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        callApi()
         return true
     }
 }
 
 extension UserListViewController: UserListViewModelDelegate {
-    func usersFetched() {
+    func usersFetched(isSearchTextChanged: Bool) {
         DispatchQueue.main.async { [weak self] in
             self?.activityIndicator.stopAnimating()
             self?.usersTableView.reloadData()
+            if isSearchTextChanged,
+               (self?.viewModel.users.count ?? 0) > 0 {
+                self?.usersTableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+            }
         }
     }
     
     func failedtoFetchUsers() {
         DispatchQueue.main.async { [weak self] in
             self?.activityIndicator.stopAnimating()
-            self?.showAlert()
+            if self?.viewModel.users.count == 0 {
+                self?.showAlert()
+            }
         }
     }
     

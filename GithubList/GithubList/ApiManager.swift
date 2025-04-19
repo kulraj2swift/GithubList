@@ -13,6 +13,11 @@ struct Urls {
     static let searchEndpoint = "search/users"
 }
 
+struct ApiKeys {
+    static let resultsPerPage = "per_page"
+    static let pageNumber = "page"
+}
+
 class ApiManager {
     
     static let shared = ApiManager()

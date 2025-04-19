@@ -22,7 +22,8 @@ class UserTableViewCell: UITableViewCell {
             loginLabel.text = user?.login
             if let avatar = user?.avatarUrl,
                let avatarUrl = URL(string: avatar) {
-                avatarImageView.af.setImage(withURL: avatarUrl, cacheKey: user?.id)
+                let id = String(user?.id ?? 0)
+                avatarImageView.af.setImage(withURL: avatarUrl, cacheKey: id)
             }
         }
     }

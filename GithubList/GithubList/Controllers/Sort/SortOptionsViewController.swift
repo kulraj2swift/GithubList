@@ -46,6 +46,13 @@ class SortOptionsViewController: UIViewController {
         applyColorToUi()
         roundCorners()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        for sortOptionView in sortOptionViews {
+            sortOptionView.selectedSortOrder = selectedSortOrder
+        }
+    }
 
     func addSortOptions() {
         sortOptionViews.removeAll()

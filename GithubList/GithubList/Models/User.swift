@@ -36,7 +36,7 @@ struct SearchResult: Codable {
 struct User: Codable {
     
     var login: String?
-    var id: String?
+    var id: Int?
     var nodeId: String?
     var avatarUrl: String?
     var gravatarId: String?
@@ -82,7 +82,7 @@ struct User: Codable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         login = try? container.decode(String.self, forKey: .login)
-        id = try? container.decode(String.self, forKey: .id)
+        id = try? container.decode(Int.self, forKey: .id)
         nodeId = try? container.decode(String.self, forKey: .nodeId)
         avatarUrl = try? container.decode(String.self, forKey: .avatarUrl)
         gravatarId = try? container.decode(String.self, forKey: .gravatarId)

@@ -47,6 +47,9 @@ class SortOptionView: UIView {
         layer.cornerRadius = 8
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
+        
+        ascendingButton.tintColor = .white
+        descendingButton.tintColor = .white
     }
     
     func setSortOrderButtons() {
@@ -79,13 +82,9 @@ class SortOptionView: UIView {
         if selectedSortOption == sortOption {
             backgroundColor = .link
             optionLabel.textColor = .white
-            ascendingButton.tintColor = .white
-            descendingButton.tintColor = .white
         } else {
             backgroundColor = .white
             optionLabel.textColor = .black
-            ascendingButton.tintColor = .white
-            descendingButton.tintColor = .white
         }
     }
 }

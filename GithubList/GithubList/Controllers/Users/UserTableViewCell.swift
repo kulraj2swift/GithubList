@@ -6,18 +6,33 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class UserTableViewCell: UITableViewCell {
+    
+    static let nibName = "UserTableViewCell"
+    static let reuseIdentifier = "UserCell"
+    
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var loginLabel: UILabel!
+    
+    var user: User? {
+        didSet {
+            loginLabel.text = user?.login
+            if let avatar = user?.avatarUrl,
+               let avatarUrl = URL(string: avatar) {
+                avatarImageView.af.setImage(withURL: avatarUrl, cacheKey: user?.id)
+            }
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        containerView.layer.cornerRadius = 8
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.lightGray.cgColor
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.height/2
     }
     
 }

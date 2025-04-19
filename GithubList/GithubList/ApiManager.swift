@@ -22,7 +22,7 @@ class ApiManager {
     func getHttpHeaders() -> HTTPHeaders {
         var headers = HTTPHeaders()
         headers.add(name: "X-GitHub-Api-Version", value: "2022-11-28")
-        headers.add(name: "accept", value: "application/vnd.github+raw")
+        headers.add(name: "accept", value: "application/json")
         headers.add(name: "Authorization", value: Keys.bearerToken)
         return headers
     }

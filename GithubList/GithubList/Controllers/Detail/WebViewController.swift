@@ -16,23 +16,22 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setBackbutton()
         navigationItem.title = title
         if let urlText = repositoryLink,
            let url = URL(string: urlText) {
             let urlRequest = URLRequest(url: url)
             webKitView.load(urlRequest)
         } else {
-            let alert = UIAlertAction(title: "URL is not correct", style: .default, handler: nil)
+            let alert = UIAlertController(title: "URL is not correct", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
                 self?.dismiss(animated: true, completion: {
                     self?.navigationController?.popViewController(animated: true)
                 })
             })
+            alert.addAction(okAction)
+            present(alert, animated: true)
         }
     }
 
-}
-
-extension WebViewController: WKNavigationDelegate {
-    
 }

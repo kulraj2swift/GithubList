@@ -31,6 +31,7 @@ class UserDetailViewController: UIViewController {
         nameLabel.text = ""
         followersLabel.text = ""
         repositoriesTableView.register(UINib(nibName: RepositoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: RepositoryTableViewCell.reuseIdentifier)
+        setBackbutton()
     }
     
     func setImage() {
@@ -66,7 +67,13 @@ extension UserDetailViewController: UserDetailsViewModelDelegate {
     
     func showSomethingwentWrongAlert() {
         let alertController = UIAlertController(title: "Something went wrong", message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { [weak self] _ in
+            guard let weakSelf = self else { return }
+            //if nothing to show we go back
+            if weakSelf.viewModel.repositories.count == 0 {
+                weakSelf.navigationController?.popViewController(animated: true)
+            }
+        })
         alertController.addAction(okAction)
         present(alertController, animated: true)
     }

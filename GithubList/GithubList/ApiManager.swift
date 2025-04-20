@@ -23,13 +23,42 @@ class ApiManager {
     
     static let shared = ApiManager()
     
-    private init() {}
+    static let sessionManager: Session = {
+        let configuration = URLSessionConfiguration.af.default
+        
+        configuration.timeoutIntervalForRequest = 30
+        configuration.waitsForConnectivity = true
+        configuration.headers = getHttpHeaders()
+        
+        return Session(configuration: configuration, interceptor: RequestInterceptor(storage: Keys.bearerToken))
+    }()
     
-    func getHttpHeaders() -> HTTPHeaders {
-        var headers = HTTPHeaders()
+    private init() {
+        
+    }
+    
+    private static func getHttpHeaders() -> HTTPHeaders {
+        var headers: HTTPHeaders = []
         headers.add(name: "X-GitHub-Api-Version", value: "2022-11-28")
         headers.add(name: "accept", value: "application/json")
-        headers.add(name: "Authorization", value: Keys.bearerToken)
+        
         return headers
+    }
+}
+
+final class RequestInterceptor: Alamofire.RequestInterceptor {
+
+    private let storage: String
+
+    init(storage: String) {
+        self.storage = storage
+    }
+
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping @Sendable (Result<URLRequest, any Error>) -> Void) {
+        var urlRequest = urlRequest
+
+        /// Set the Authorization header value using the access token.
+        urlRequest.setValue("Bearer " + storage, forHTTPHeaderField: "Authorization")
+        completion(.success(urlRequest))
     }
 }

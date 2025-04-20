@@ -35,11 +35,11 @@ class UserDetailsViewModel {
         let url = Urls.baseUrl + Urls.userEndPoint + "\(userId)"
         
         Task {
-            async let detailResponse = AF.request(url, method: .get, headers: apiManager.getHttpHeaders())
+            async let detailResponse = ApiManager.sessionManager.request(url, method: .get)
                 .validate()
                 .serializingDecodable(User.self)
                 .response
-            async let repositoryListResponse = AF.request(user?.reposUrl ?? "", method: .get, headers: apiManager.getHttpHeaders())
+            async let repositoryListResponse = ApiManager.sessionManager.request(user?.reposUrl ?? "", method: .get)
                 .validate()
                 .serializingDecodable([Repository].self)
                 .response

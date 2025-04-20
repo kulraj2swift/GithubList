@@ -22,7 +22,7 @@ class UserListViewModel {
     private var previousSearchText: String?
     var selectedSortOption: SortOption = .none
     var selectedSortOrder: UserSortOrder = .ascending
-    private let pageLimit = 40
+    private let pageLimit = 20
     private var pageNumber = 1
     var incompleteResults = false
     
@@ -40,18 +40,18 @@ class UserListViewModel {
         }
         query.append("type:user")
         query.append("&")
-        query.append("\(ApiKeys.resultsPerPage):\(pageLimit)")
+        query.append("\(ApiKeys.resultsPerPage)=\(pageLimit)")
         query.append("&")
-        query.append("\(ApiKeys.pageNumber):\(pageNumber)")
-        print("query: \(query)")
+        query.append("\(ApiKeys.pageNumber)=\(pageNumber)")
+        
         var characterSet = CharacterSet.urlQueryAllowed
         characterSet.remove(charactersIn: ":")
         characterSet.insert(charactersIn: "?+=")
         query = query.addingPercentEncoding(withAllowedCharacters: characterSet) ?? ""
         let url = Urls.baseUrl + Urls.searchEndpoint + query
-        
+        print("query: \(url)")
         Task {
-            let response = await AF.request(url, method: .get, headers: apiManager.getHttpHeaders())
+            let response = await ApiManager.sessionManager.request(url, method: .get)
                 .validate()
                 .serializingDecodable(SearchResult.self)
                 .response

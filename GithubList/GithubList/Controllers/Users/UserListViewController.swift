@@ -13,6 +13,7 @@ class UserListViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet weak var noResultsLabel: UILabel!
     
     var viewModel: UserListViewModel!
     
@@ -46,10 +47,21 @@ class UserListViewController: UIViewController {
             self?.viewModel.selectedSortOrder = sortOrder
             self?.viewModel.selectedSortOption = sortOption
             self?.viewModel.applySorting()
-            self?.usersTableView.reloadData()
+            self?.reloadUsers()
             self?.dismiss(animated: true)
         }
         present(sortViewController, animated: true)
+    }
+    
+    func reloadUsers() {
+        if viewModel.sortedUsers.isEmpty {
+            usersTableView.isHidden = true
+            noResultsLabel.isHidden = false
+        } else {
+            usersTableView.isHidden = false
+            noResultsLabel.isHidden = true
+            usersTableView.reloadData()
+        }
     }
 }
 
@@ -117,7 +129,7 @@ extension UserListViewController: UserListViewModelDelegate {
     func usersFetched(isSearchTextChanged: Bool) {
         DispatchQueue.main.async { [weak self] in
             self?.activityIndicator.stopAnimating()
-            self?.usersTableView.reloadData()
+            self?.reloadUsers()
             if isSearchTextChanged,
                (self?.viewModel.users.count ?? 0) > 0 {
                 self?.usersTableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)

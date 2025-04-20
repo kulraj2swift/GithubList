@@ -141,6 +141,8 @@ extension UserListViewController: UserListViewModelDelegate {
             self?.activityIndicator.stopAnimating()
             if self?.viewModel.users.count == 0 {
                 self?.showAlert()
+                self?.usersTableView.isHidden = true
+                self?.noResultsLabel.isHidden = false
             }
         }
     }

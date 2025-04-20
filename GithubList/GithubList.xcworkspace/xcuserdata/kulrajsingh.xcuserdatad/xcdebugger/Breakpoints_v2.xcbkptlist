@@ -46,8 +46,8 @@
             filePath = "GithubList/Controllers/Users/UserListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "searchForUsers(text:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "GithubList/Controllers/Users/UserListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "searchForUsers(text:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -144,8 +144,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
             endingLineNumber = "88"
-            landmarkName = "UserListViewModel"
-            landmarkType = "3">
+            landmarkName = "getSortedUsers()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -193,22 +193,6 @@
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "73A7FB3C-FE83-465E-ABAD-7F4C28502F8F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GithubList/Controllers/Users/UserListViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "searchForUsers(text:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -384,7 +368,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
             endingLineNumber = "133"
-            landmarkName = "getSortedUsers()"
+            landmarkName = "fetchNextBatch()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -400,7 +384,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
             endingLineNumber = "131"
-            landmarkName = "getSortedUsers()"
+            landmarkName = "fetchNextBatch()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -606,8 +590,8 @@
             filePath = "GithubList/Controllers/Users/UserListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "searchForUsers(text:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -622,8 +606,8 @@
             filePath = "GithubList/Controllers/Users/UserListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "searchForUsers(text:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -639,9 +623,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "setNextUrl(response:)"
-            landmarkType = "7">
+            endingLineNumber = "146">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -655,9 +637,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "setNextUrl(response:)"
-            landmarkType = "7">
+            endingLineNumber = "150">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -670,8 +650,8 @@
             filePath = "GithubList/Controllers/Users/UserListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "searchForUsers(text:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -703,9 +683,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "setNextUrl(response:)"
-            landmarkType = "7">
+            endingLineNumber = "156">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

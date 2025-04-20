@@ -30,6 +30,7 @@ class UserListViewModel {
         var shouldClearPreviousResults = false
         if previousSearchText != text {
             shouldClearPreviousResults = true
+            pageNumber = 1
         }
         previousSearchText = text
         var query = "?q="
@@ -59,7 +60,6 @@ class UserListViewModel {
             case .success(let searchResult):
                 if shouldClearPreviousResults {
                     users.removeAll()
-                    pageNumber = 1
                 }
                 let nextUserBatch = searchResult.items ?? []
                 users.append(contentsOf: nextUserBatch)

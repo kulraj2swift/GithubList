@@ -55,10 +55,6 @@ class UserListViewModel {
                 .validate()
                 .serializingDecodable(SearchResult.self)
                 .response
-            if let data = response.data,
-               let json = try? JSONSerialization.jsonObject(with: data) {
-                print(json)
-            }
             switch response.result {
             case .success(let searchResult):
                 if shouldClearPreviousResults {

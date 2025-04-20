@@ -11,6 +11,7 @@ import Alamofire
 struct Urls {
     static let baseUrl = "https://api.github.com/"
     static let searchEndpoint = "search/users"
+    static let userEndPoint = "user/"
 }
 
 struct ApiKeys {

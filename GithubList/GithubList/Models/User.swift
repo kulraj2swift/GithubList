@@ -55,6 +55,20 @@ struct User: Codable {
     var userViewType: String?
     var isSiteAdmin: Bool?
     var score: Float?
+    var name: String?
+    var company: String?
+    var blog: String?
+    var location: String?
+    var email: String?
+    var hirebale: Bool?
+    var bio: String?
+    var twitterUsername: String?
+    var publicRepoCount: Int?
+    var publicGistCount: Int?
+    var followerCount: Int?
+    var followingCount: Int?
+    var createdAt: String?
+    var updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
         case login
@@ -77,6 +91,20 @@ struct User: Codable {
         case userViewType = "user_view_type"
         case isSiteAdmin = "site_admin"
         case score
+        case name
+        case company
+        case blog
+        case location
+        case email
+        case hireable
+        case bio
+        case twitterUsername = "twitter_username"
+        case publicRepoCount = "public_repos"
+        case publicGistCount = "public_gists"
+        case followerCount = "followers"
+        case followingCount = "following"
+        case createdAt
+        case updatedAt
     }
     
     init(from decoder: any Decoder) throws {
@@ -101,6 +129,20 @@ struct User: Codable {
         loginType = try? container.decode(String.self, forKey: .loginType)
         isSiteAdmin = try? container.decode(Bool.self, forKey: .isSiteAdmin)
         score = try? container.decode(Float.self, forKey: .score)
+        name = try? container.decodeIfPresent(String.self, forKey: .name)
+        company = try? container.decodeIfPresent(String.self, forKey: .company)
+        blog = try? container.decodeIfPresent(String.self, forKey: .blog)
+        location = try? container.decodeIfPresent(String.self, forKey: .location)
+        email = try? container.decodeIfPresent(String.self, forKey: .email)
+        hirebale = try? container.decodeIfPresent(Bool.self, forKey: .hireable)
+        bio = try? container.decodeIfPresent(String.self, forKey: .bio)
+        twitterUsername = try? container.decodeIfPresent(String.self, forKey: .twitterUsername)
+        publicRepoCount = try? container.decodeIfPresent(Int.self, forKey: .publicRepoCount)
+        publicGistCount = try? container.decodeIfPresent(Int.self, forKey: .publicGistCount)
+        followerCount = try? container.decodeIfPresent(Int.self, forKey: .followerCount)
+        followingCount = try? container.decodeIfPresent(Int.self, forKey: .followingCount)
+        createdAt = try? container.decodeIfPresent(String.self, forKey: .createdAt)
+        updatedAt = try? container.decodeIfPresent(String.self, forKey: .updatedAt)
     }
     
     func encode(to encoder: any Encoder) throws {
@@ -124,6 +166,19 @@ struct User: Codable {
         try container.encodeIfPresent(receivedEventsUrl, forKey: .receivedEventsUrl)
         try container.encodeIfPresent(loginType, forKey: .loginType)
         try container.encodeIfPresent(isSiteAdmin, forKey: .isSiteAdmin)
-        try container.encodeIfPresent(score, forKey: .score)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(company, forKey: .company)
+        try container.encodeIfPresent(blog, forKey: .blog)
+        try container.encodeIfPresent(location, forKey: .location)
+        try container.encodeIfPresent(email, forKey: .email)
+        try container.encodeIfPresent(hirebale, forKey: .hireable)
+        try container.encodeIfPresent(bio, forKey: .bio)
+        try container.encodeIfPresent(twitterUsername, forKey: .twitterUsername)
+        try container.encodeIfPresent(publicRepoCount, forKey: .publicRepoCount)
+        try container.encodeIfPresent(publicGistCount, forKey: .publicGistCount)
+        try container.encodeIfPresent(followerCount, forKey: .followerCount)
+        try container.encodeIfPresent(followingCount, forKey: .followingCount)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
     }
 }

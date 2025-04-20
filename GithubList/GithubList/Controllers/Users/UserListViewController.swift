@@ -89,6 +89,15 @@ extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = viewModel.sortedUsers[indexPath.row]
+        let detailsViewController = UserDetailViewController(nibName: "UserDetailViewController", bundle: nil)
+        let detailsViewModel = UserDetailsViewModel()
+        detailsViewModel.user = user
+        detailsViewController.viewModel = detailsViewModel
+        navigationController?.pushViewController(detailsViewController, animated: true)
+    }
 }
 
 extension UserListViewController: UITextFieldDelegate {

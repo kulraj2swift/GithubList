@@ -101,6 +101,10 @@ extension UserDetailViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let repository = viewModel.repositories[indexPath.row]
+        let webViewController = WebViewController(nibName: "WebViewController", bundle: nil)
+        webViewController.title = repository.name
+        webViewController.repositoryLink = repository.htmlUrl
+        navigationController?.pushViewController(webViewController, animated: true)
     }
 }

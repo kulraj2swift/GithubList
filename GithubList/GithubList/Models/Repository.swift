@@ -17,6 +17,7 @@ struct Repository: Codable {
     var language: String?
     var description: String?
     var stargazersCount: Int?
+    var htmlUrl: String?
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -29,6 +30,7 @@ struct Repository: Codable {
         self.language = try? container.decodeIfPresent(String.self, forKey: .language)
         self.description = try? container.decodeIfPresent(String.self, forKey: .description)
         self.stargazersCount = try? container.decodeIfPresent(Int.self, forKey: .stargazersCount)
+        self.htmlUrl = try? container.decodeIfPresent(String.self, forKey: .htmlUrl)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -41,6 +43,7 @@ struct Repository: Codable {
         case language
         case description
         case stargazersCount = "stargazers_count"
+        case htmlUrl = "html_url"
     }
     
     func encode(to encoder: any Encoder) throws {
@@ -54,6 +57,7 @@ struct Repository: Codable {
         try container.encodeIfPresent(self.language, forKey: .language)
         try container.encodeIfPresent(self.description, forKey: .description)
         try container.encodeIfPresent(self.stargazersCount, forKey: .stargazersCount)
+        try container.encodeIfPresent(self.htmlUrl, forKey: .htmlUrl)
     }
 }
 

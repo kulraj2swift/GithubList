@@ -24,7 +24,6 @@ class UserListViewController: UIViewController {
         viewModel.delegate = self
         callApi()
         usersTableView.register(UINib(nibName: UserTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: UserTableViewCell.reuseIdentifier)
-        //usersTableView.register(UIView.self, forHeaderFooterViewReuseIdentifier: "FooterReuse")
     }
     
     @IBAction func searchTapped(_ sender: Any) {

@@ -22,6 +22,10 @@ struct ApiKeys {
 class ApiManager {
     
     static let shared = ApiManager()
+    private static let encryptedKey = "de1766d1a0d1cead7275336e02489dd0c35e1b8f21059c866bcddd2bdca77dcbfd3713c7e4fec3c0269bdec9299f610ea01b598c8d48a749b83b18a3f28c606d814b831477349ee28f7e9e89382dfb56c489956b1ab58daae3ce1970cf1a0098"
+    private static let key128   = "1234567890123456"                   // 16 bytes for AES128
+    private static let key256   = "12345678901234561234567890123456"   // 32 bytes for AES256
+    private static let iv       = "abcdefghijklmnop"
     
     static let sessionManager: Session = {
         let configuration = URLSessionConfiguration.af.default
@@ -30,7 +34,9 @@ class ApiManager {
         configuration.waitsForConnectivity = true
         configuration.headers = getHttpHeaders()
         
-        return Session(configuration: configuration, interceptor: RequestInterceptor(storage: Keys.bearerToken))
+        let aes128 = AES(key: key128, iv: iv)
+        let token = aes128?.getPlainText(encryptedText: encryptedKey) ?? ""
+        return Session(configuration: configuration, interceptor: RequestInterceptor(storage: token))
     }()
     
     private init() {
